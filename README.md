@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Flask-User starter app
 
 This code base serves as a great starting point to write your next Flask application  
@@ -129,3 +130,6 @@ With thanks to the following Flask extensions:
 
     # Please consider leaving the line above in your project's README file. Thank you.
 
+=======
+# CloudWear
+>>>>>>> 03733ed4ef800f586151d4bb30735bc44a837586
