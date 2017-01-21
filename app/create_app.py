@@ -33,8 +33,7 @@ def create_app(extra_config_settings={}):
     # Setup Flask-Migrate
     migrate = Migrate(app, db)
     manager.add_command('db', MigrateCommand)
-    server = Server(host="127.0.0.1", port=80)
-    manager.add_command("runserver", Server())
+
 
     # Setup Flask-Mail
     mail = Mail(app)
