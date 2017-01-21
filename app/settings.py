@@ -5,9 +5,9 @@
 import os
 
 # Application settings
-APP_NAME = "Flask-User starter app"
+APP_NAME = "CloudWear"
 APP_SYSTEM_ERROR_SUBJECT_LINE = APP_NAME + " system error"
-
+SERVER_NAME = "104.198.9.18:80"
 # Flask settings
 CSRF_ENABLED = True
 
