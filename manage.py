@@ -2,10 +2,11 @@
 # - Heroku starts gunicorn, which loads Procfile, which starts manage.py
 # - Developers can run it from the command line: python runserver.py
 
-from app import create_app, manager
-from flask_script import Server
+from app import create_app
+from flask_script import Server, Manager
 
 app = create_app()
+manager = Manager()
 server = Server(host="127.0.0.1", port=80)
 manager.add_command("runserver", Server())
 
@@ -16,4 +17,4 @@ if __name__ == "__main__":
     # - python manage.py db
 
 
-    manager.run(host= '0.0.0.0')
+    manager.run()
