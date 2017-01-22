@@ -1,4 +1,5 @@
-<html>
+{% extends "_base.html" %}
+{% block content %}
 	<head>
 		<title>CloudWear</title>
 		<meta charset="utf-8" />
@@ -6,6 +7,7 @@
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link href="{{url_for('static', filename='main.css')}}" rel="stylesheet" media="screen">
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<link href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/yeti/bootstrap.min.css" rel="stylesheet" media="screen">
         <script src="{{url_for('static', filename='mithril.min.js')}}"></script>
 	</head>
 	<body class="homepage">
@@ -200,4 +202,4 @@
 			<script src="{{url_for('static', filename='main.js')}}"></script>
 
 	</body>
-</html>
+{% endblock %}
