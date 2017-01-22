@@ -1,0 +1,25 @@
+<div id="Upload" class="modal fade" data-backdrop="static" data-keyboard="false">
+   <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="uploadtitle" class="modal-title">New Clothing</h4>
+            </div>
+            <div id="createPositionBody" class="modal-body">
+
+                <form action="" method="post" name="create" id="CreatePositionForm">
+                    {{ form1.csrf_token }}
+                  <p>
+                    {{ form1.name(placeholder="Name", class_="form-control") }}
+                  </p>
+                  <p>
+                    {{ form1.description(class_="form-control", rows=5, placeholder="description...") }}
+                  </p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="upload_cancel" id="createPositionCancel" data-dismiss="modal">Cancel</button>
+                <button type="button" class="upload_submit" id="createPositionSubmit">Create</button>
+            </div>
+        </div>
+    </div>
+</div>

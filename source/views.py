@@ -24,3 +24,8 @@ main_blueprint = Blueprint('main', __name__,)
 @login_required
 def home():
     return render_template('main/index.html')
+
+@main_blueprint.route('/upload/', methods=['POST'])
+@login_required
+def upload():
+    return render_template()
