@@ -8,6 +8,7 @@ import shutil
 import os
 import json
 import hashlib
+import warnings
 
 from sklearn.cross_validation import KFold
 from sklearn.grid_search import GridSearchCV
@@ -26,6 +27,8 @@ CLOTHE_PATH = './clothe'
 CLOTHE_PROC_PATH = './clothe_processed'
 CLOTHE_TEST_PATH = './clothe_test'
 CLOTHE_TEST_PROC_PATH = './clothe_test_processed'
+
+warnings.filterwarnings("ignore")
 
 saved_stdout = sys.stdout
 
@@ -159,7 +162,7 @@ def main():
     os.system('mv ./final_images/0.jpg ./final_images/'+hasher.hexdigest()+'.jpg')
     out_image = {}
     out_image['category'] = [str(y_pred)]
-    out_image['image'] = ['./final_images/'+hasher.hexdigest()+'.jpg']
+    out_image['image'] = ['/home/oc/CloudWear/clothe_recognition/final_images/'+hasher.hexdigest()+'.jpg']
 
     print(json.dumps(out_image))
 
