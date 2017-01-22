@@ -60,7 +60,7 @@ class cloudwear
         //namedWindow("wn1", WINDOW_NORMAL);
         //imshow("wn1", i1);
         //waitKey(0);
-        imwrite("temp.jpg", i1);
+        imwrite("0.jpg", i1);
     }
 
     void canny_threshold()

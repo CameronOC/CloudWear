@@ -5,6 +5,9 @@ from time import time
 import numpy as np
 import sys
 import shutil
+import os
+import json
+import hashlib
 
 from sklearn.cross_validation import KFold
 from sklearn.grid_search import GridSearchCV
@@ -22,9 +25,10 @@ from bunch import Bunch
 CLOTHE_PATH = './clothe'
 CLOTHE_PROC_PATH = './clothe_processed'
 CLOTHE_TEST_PATH = './clothe_test'
+#CLOTHE_TEST_PROC_PATH = './clothe_test_processed'
 CLOTHE_TEST_PROC_PATH = './clothe_test_processed'
 
-
+saved_stdout = sys.stdout
 
 def get_clothe(h=200, w=200):
     # processing data: make all images h X w in size and gray scale, save them in diff folder
@@ -208,8 +212,25 @@ def main():
     #print ("Predicting clothe names on the testing set")
     y_pred = clf.predict(test_pca)
 
-    print("y_pred : " +str(y_pred))
-    print ("Computed in %0.3fs" % (time() - t0))
+    #sys.stdout = sys.stderr = open(os.devnull, "w")
+    #print("y_pred : " +str(y_pred))
+    #sys.stdout = saved_stdout
+    #print ("Computed in %0.3fs" % (time() - t0))
+
+    #os.system('mkdir final_images')
+    os.system('cp ./clothe_test/0.jpg ./final_images/')
+
+    hasher = hashlib.md5()
+    with open('./final_images/0.jpg', 'rb') as afile:
+            buf = afile.read()
+            hasher.update(buf)
+
+    os.system('mv ./final_images/0.jpg ./final_images/'+hasher.hexdigest()+'.jpg')
+    out_image = {}
+    out_image['category'] = [str(y_pred)]
+    out_image['image'] = ['./final_images/'+hasher.hexdigest()+'.jpg']
+
+    print(json.dumps(out_image))
 
 if __name__ == "__main__":
     main()
