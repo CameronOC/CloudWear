@@ -15,7 +15,8 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     registered_on = db.Column(db.DateTime, nullable=False)
     admin = db.Column(db.Boolean, nullable=False, default=False)
-
+    tops = db.relationship('Tops', backref='user',lazy='dynamic')
+    bottoms = db.relationship('Bottoms', backref='user',lazy='dynamic')
     def __init__(self, email, password, paid=False, admin=False):
         self.email = email
         self.password = bcrypt.generate_password_hash(password)
@@ -36,3 +37,23 @@ class User(db.Model):
 
     def __repr__(self):
         return '<email {}'.format(self.email)
+
+class Top(db.Model):
+
+    __tablename__ = "tops"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __init__(self, user_id):
+        self = user_id = user_id
+
+class Bottom(db.Model):
+
+    __tablename__ = "bottoms"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __init__(self, user_id):
+        self=user_id = user_id
