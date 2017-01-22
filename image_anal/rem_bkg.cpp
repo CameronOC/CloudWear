@@ -12,11 +12,12 @@ class cloudwear
 {
     public:
     // members
-    Mat nc_img1, img1, img1_gray;
+    Mat nc_img1, img1, img1_gray, c_img1;
     Mat dst, det_edges;
     string wn1;
     int edge_thres, low_thres, ratio, kernel_size;
-    int max_low_thres, offset_x, offset_y;
+    int max_low_thres, offset_x, offset_y, res;
+    bool bkg_col;
 
     // background shit
     Mat frame, fgMaskMOG2;
@@ -32,17 +33,22 @@ class cloudwear
         kernel_size = 3;
         offset_x = 20;
         offset_y = 600;
+        res = 750;
+        bkg_col = true;
     }
 
     void read_image(string a)
     {
         nc_img1 = imread(a);
+        resize(nc_img1, c_img1, Size(res, res),INTER_LANCZOS4);
+        //c_img1 = img1;
         Rect roi;
         roi.x = offset_x;
         roi.y = offset_y;
-        roi.width = nc_img1.size().width - (offset_x*2);
-        roi.height = nc_img1.size().height - (offset_y*2);
-        img1 = nc_img1(roi);
+        //roi.width = nc_img1.size().width - (offset_x*2);
+        //roi.height = nc_img1.size().height - (offset_y*2);
+        //img1 = nc_img1(roi);
+        img1 = c_img1;
         dst.create(img1.size(), img1.type());
         cvtColor(img1, img1_gray, COLOR_BGR2GRAY);
         //img1_gray = img1;
@@ -91,9 +97,13 @@ class cloudwear
             for(int j=0; j<img1_gray.cols;j++)
             {
                 //cout << img1_gray.at<double>(i, j)<<endl;
-                if((int)img1_gray.at<uchar>(i,j) > a - 20) 
+                if((int)img1_gray.at<uchar>(i,j) > a - 20 && bkg_col == true) 
                 {
                     img1_gray.at<uchar>(i,j) = 0;                    
+                }
+                else if((int)img1_gray.at<uchar>(i,j) < 25 && bkg_col == false)
+                {
+                    img1_gray.at<uchar>(i,j) = 255;
                 }
             }
         }
@@ -117,11 +127,12 @@ class cloudwear
 int main(int argc, char** argv)
 {
     string a;
-    a = "track_pants.JPG";
+    //a = "skinny_jeans_1.jpg";
+    a = argv[1];
     ob.read_image(a);
     ob.gray_thresh();
     //ob.process_images();
-    //ob.display_image(ob.img1_gray);
+    //ob.display_image(ob.c_img1);
     //ob.canny_threshold();
 }
 
