@@ -5,6 +5,8 @@ import os
 import unittest
 import coverage
 
+from flask import send_from_directory
+
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
@@ -20,6 +22,25 @@ manager = Manager(app)
 # migrations
 manager.add_command('db', MigrateCommand)
 
+@app.route('/source/templates/assests/js/<path:path>')
+def send_js(path):
+    return send_from_directory('js', path)
+
+@app.route('/source/templates/assests/css/<path:path>')
+def send_css(path):
+    return send_from_directory('css', path)
+
+@app.route('/source/templates/assests/fonts/<path:path>')
+def send_fonts(path):
+    return send_from_directory('fonts', path)
+
+@app.route('/source/templates/images/<path:path>')
+def send_images(path):
+    return send_from_directory('images', path)
+
+@app.route('/source/templates/<path:path>')
+def send_templates(path):
+    return send_from_directory('templates', path)
 
 @manager.command
 def test():
