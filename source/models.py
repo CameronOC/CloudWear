@@ -38,22 +38,3 @@ class User(db.Model):
     def __repr__(self):
         return '<email {}'.format(self.email)
 
-class Top(db.Model):
-
-    __tablename__ = "tops"
-
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __init__(self, user_id):
-        self.user_id =  user_id
-
-class Bottom(db.Model):
-
-    __tablename__ = "bottoms"
-
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __init__(self, user_id):
-        self=user_id = user_id

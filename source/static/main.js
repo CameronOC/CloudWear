@@ -3,6 +3,9 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+var count_top=0;
+var count_middle=0;
+var count_bottom=0;
 
 (function($) {
 
@@ -19,64 +22,92 @@
 				}
 			}
 		});
-    
-var urlArray = ['images/shirt.jpg','images/pants.jpg','images/hat.jpg'];
-    var count = -1;
 
-      function nextUrl() {
-        url = urlArray[++count];
-        count = (count >= urlArray.length - 1) ? -1 : count;
+var TopURLArray = ["{{url_for('static', filename='trucker.jpg')}}","{{url_for('static', filename='fedora.jpg')}}","{{url_for('static', filename='hat.jpg')}}"];
+var MiddleURLArray = ["{{url_for('static', filename='shirt.jpg')}}","{{url_for('static', filename='blueshirt.jpg')}}","{{url_for('static', filename='acid.png')}}"];
+var BottomURLArray = ["{{url_for('static', filename='fleecepants.jpg')}}","{{url_for('static', filename='pants.jpg')}}","{{url_for('static', filename='navypants.jpg')}}"];
+
+function TopnextUrl() {
+        window.count_top++;
+        window.count_top = (window.count_top >= TopURLArray.length) ? 0 : window.count_top;
+        url = TopURLArray[window.count_top];
         return url;
       }
 
-var HEADlinkforward = nextUrl()
-var HEADlinkback = nextUrl()
+function TopbackUrl() {
+        window.count_top--;
+        window.count_top = (window.count_top < 0) ? TopURLArray.length : window.count_top;
+        url = TopURLArray[window.count_top];
+        return url;
+      }
 
-var TOPlinkforward = nextUrl()
-var TOPlinkback = nextUrl()
+function MiddlenextUrl() {
+        window.count_middle++;
+        window.count_middle = (window.count_middle >= MiddleURLArray.length) ? 0 : window.count_middle;
+        url = MiddleURLArray[window.count_middle];
+        return url;
+      }
 
-var BOTTOMlinkforward = nextUrl()
-var BOTTOMlinkback = nextUrl()
+function MiddlebackUrl() {
+        window.count_middle--;
+        window.count_middle = (window.count_middle < 0) ? MiddleURLArray.length : window.count_middle;
+        url = MiddleURLArray[window.count_middle];
+        return url;
+      }
+
+function BottomnextUrl() {
+        window.count_bottom++;
+        window.count_bottom = (window.count_bottom >= BottomURLArray.length) ? 0 : window.count_bottom;
+        url = BottomURLArray[window.count_bottom];
+        return url;
+      }
+
+function BottombackUrl() {
+        window.count_bottom--;
+        window.count_bottom = (window.count_bottom < 0) ? BottomURLArray.length : window.count_bottom;
+        url = BottomURLArray[window.count_bottom];
+        return url;
+      }
 
     $(function() {
  $('.button-1-left').click(function(e){
      e.preventDefault();
-   $("#head").attr('src',HEADlinkback);
+   $("#top").attr('src',TopbackUrl());
  });
 });
-    
+
     $(function() {
  $('.button-1-right').click(function(e){
      e.preventDefault();
-   $("#head").attr('src',HEADlinkforward);
+   $("#top").attr('src',TopnextUrl());
  });
 });
-    
+
     $(function() {
  $('.button-2-left').click(function(e){
      e.preventDefault();
-   $("#top").attr('src',TOPlinkback);
+   $("#middle").attr('src',MiddlebackUrl());
  });
 });
-    
+
     $(function() {
  $('.button-2-right').click(function(e){
      e.preventDefault();
-   $("#top").attr('src',TOPlinkforward);
+   $("#middle").attr('src',MiddlenextUrl());
  });
 });
-    
+
     $(function() {
  $('.button-3-left').click(function(e){
      e.preventDefault();
-   $("#bottom").attr('src',BOTTOMlinkback);
+   $("#bottom").attr('src',BottombackUrl());
  });
 });
-    
+
     $(function() {
  $('.button-3-right').click(function(e){
      e.preventDefault();
-   $("#bottom").attr('src',BOTTOMlinkforward);
+   $("#bottom").attr('src',BottomnextUrl());
  });
 });
 
