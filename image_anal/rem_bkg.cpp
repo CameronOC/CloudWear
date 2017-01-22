@@ -57,9 +57,10 @@ class cloudwear
 
     void display_image(Mat i1)
     {
-        namedWindow("wn1", WINDOW_NORMAL);
-        imshow("wn1", i1);
-        waitKey(0);
+        //namedWindow("wn1", WINDOW_NORMAL);
+        //imshow("wn1", i1);
+        //waitKey(0);
+        imwrite("temp.jpg", i1);
     }
 
     void canny_threshold()
@@ -107,7 +108,7 @@ class cloudwear
                 }
             }
         }
-        cout << a << endl;
+        //cout << a << endl;
         //blur(img1_gray, img1_gray, Size(3,3));
         canny_threshold();
         //display_image(img1_gray);
